@@ -1,0 +1,82 @@
+body{
+    background-color: rgb(102, 101, 101);
+}
+button{
+    display: block;
+}
+button:hover{
+    cursor: pointer;
+    background-color: rgb(206, 206, 206);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(9, 100px); /* 9 columns, 40px wide each */
+    grid-template-rows: repeat(9, 100px);    /* 9 rows, 40px high each */
+    width: fit-content;
+    margin: 50px auto;
+    border: 3px black;   
+}
+
+.grid-item {
+    background-color: whitesmoke;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 1;
+    padding: 0;
+    overflow: hidden;
+    font-size: 30px;
+    padding-top: 5px;
+}
+.grid-item:focus{
+    outline: none;
+    background-color: rgba(245, 245, 245, 0.842);
+}
+.grid-item[contenteditable="true"] {
+    white-space: nowrap;
+    caret-color: transparent;
+}
+
+/*default border for the grid*/
+.grid-item:nth-child(9n + 1),
+.grid-item:nth-child(9n + 4),
+.grid-item:nth-child(9n + 7) {
+  border-left: 6px solid black;
+}
+
+/* Bold RIGHT border for col 9 */
+.grid-item:nth-child(9n) {
+  border-right: 6px solid black;
+}
+
+/* Bold TOP border for row 1, 4, 7 */
+.grid-item:nth-child(n):nth-child(-n+9),
+.grid-item:nth-child(n+28):nth-child(-n+36),
+.grid-item:nth-child(n+55):nth-child(-n+63) {
+  border-top: 6px solid black;
+}
+
+/* Bold BOTTOM border for row 9 */
+.grid-item:nth-child(n+73) {
+  border-bottom: 6px solid black;
+}
+
+.button-container{
+    position: absolute;
+    display: block;
+    margin: 20px auto;
+}
+.button-container button{
+    margin-bottom: 20px;
+    font-size: 40px;
+    border-radius: 10px;
+    border-width: 4px;
+    border-color: blue;
+    width: 250px;
+    height: 60px;
+}
