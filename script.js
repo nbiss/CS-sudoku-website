@@ -1,7 +1,6 @@
 class sudokuBoard {
   constructor(){
     this.currboard = this.boards[0] 
-    //this.startingBoard[this.randBoard()]
   }
 
   isValid(){
@@ -38,17 +37,23 @@ class sudokuBoard {
   build(){
 
   }
-  randBoard(){
-    let randint = Math.floor(Math.random() * 10)
+  randNum40(){
+    let randint = Math.floor(Math.random() * 40)
     return randint
+  }
+  changeBoardDifficulty(difficulty){
+    if (difficulty === 1){
+      return 0
+    }
+    for (let i=0; i<difficulty; i++){
+      this.currboard[randNum40()].remove()    
+    }
   }
 
   boards = {
   0: [{2:3},{6:2},{10:6},{12:9},{13:8},{16:4},{17:3},{18:4},{19:9},{22:3},{23:1},{26:6},{27:9},{29:7},{33:8},{34:6},
     {37:4},{40:9},{41:8},{47:5},{48:4},{50:7},{51:1},{53:9},{54:6},{59:3},{60:9},{62:5},{63:5},{65:8},{66:1},{70:7},
-    {71:2},{72:2},{74:9},{76:5},{77:6},{79:3},{80:8}],
-  1: [{}, {}], 
-  2: [{}, {}]
+    {71:2},{72:2},{74:9},{76:5},{77:6},{79:3},{80:8}]
 
   }
 }
@@ -79,14 +84,8 @@ window.addEventListener('DOMContentLoaded', () => {
   grid.appendChild(cell);
   }
 
-// set the board with a valid one
-  for (let i=0; i<BOARD.currboard.length;i++){
-    for (let key in BOARD.currboard[i]){
-      const c = document.querySelector(`.grid-item[data-index='${key}']`)
-      c.textContent = BOARD.currboard[i][key];
-      c.setAttribute('contenteditable', 'false')
-    }
-  }
+//Set board
+setBoard(BOARD.currboard)
 
 // reset button
   const resetButton = document.getElementById('resetButton');
@@ -107,7 +106,7 @@ window.addEventListener('DOMContentLoaded', () => {
     showSplash(isValidMsg)
   });
 
-  // start X button event listener
+  // menu X button event listener
   const xButton = document.getElementById('x-button')
   const startMenu = document.getElementById('start-menu')
   xButton.addEventListener('click', ()=> {
@@ -120,8 +119,15 @@ window.addEventListener('DOMContentLoaded', () => {
   const diffText  = document.getElementById('diffText')
   diffSlider.addEventListener('input', ()=> {
     diffText.textContent = diffSlider.value
-    diffText.style.backgroundColor = rgb(255, 0, 242)
-   
+    diffText.style.backgroundColor = getDiffColor(diffSlider.value -1) 
+  })
+
+  //Start button event listener
+  const startButton = document.getElementById('startButton')
+  startButton.addEventListener('click', ()=> {
+    BOARD.changeBoardDifficulty(diffSlider.value)
+    setBoard(BOARD.currboard)
+    startMenu.remove()
 
   })
 
@@ -131,6 +137,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 //funcitons
+
 
 function showSplash(text, duration = 2000) {
   const splash = document.createElement('div');
@@ -145,8 +152,21 @@ function showSplash(text, duration = 2000) {
 }
 
 function getDiffColor(n) {
-  const colorList = [rgb(0, 225, 0), rgb(0, 211, 21), rgb(0, 170, 17), rgb(255, 242, 0), 
-    rgb(214, 203, 0), rgb(204, 194, 0), rgb(246, 139, 0), rgb(224, 127, 0), rgb(193, 44, 34), rgb(243, 16, 0)]
+  const colorList = [`rgb(0, 225, 0)`, `rgb(0, 211, 21)`, `rgb(0, 142, 14)`, `rgb(255, 247, 98)`, 
+    `rgb(255, 244, 36)`, `rgb(255, 242, 0)`, `rgb(255, 145, 0)`, `rgb(224, 127, 0)`, `rgb(255, 17, 0)`, `rgb(203, 14, 0)`]
 
   return colorList[n]
 }
+
+function setBoard(currentBoard){
+  // set the board with a valid one
+  for (let i=0; i<currentBoard.length;i++){
+    for (let key in currentBoard[i]){
+      const c = document.querySelector(`.grid-item[data-index='${key}']`)
+      c.textContent = currentBoard[i][key];
+      c.setAttribute('contenteditable', 'false')
+    }
+  }
+}
+
+
