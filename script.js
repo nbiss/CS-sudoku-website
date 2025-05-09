@@ -46,7 +46,7 @@ class sudokuBoard {
       return 0
     }
     for (let i=0; i<difficulty; i++){
-      this.currboard[randNum40()].remove()    
+      this.currboard[this.randNum40()] = {}
     }
   }
 
@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 //Set board
-setBoard(BOARD.currboard)
+// setBoard(BOARD.currboard)
 
 // reset button
   const resetButton = document.getElementById('resetButton');
@@ -128,7 +128,6 @@ setBoard(BOARD.currboard)
     BOARD.changeBoardDifficulty(diffSlider.value)
     setBoard(BOARD.currboard)
     startMenu.remove()
-
   })
 
 });
@@ -152,8 +151,8 @@ function showSplash(text, duration = 2000) {
 }
 
 function getDiffColor(n) {
-  const colorList = [`rgb(0, 225, 0)`, `rgb(0, 211, 21)`, `rgb(0, 142, 14)`, `rgb(255, 247, 98)`, 
-    `rgb(255, 244, 36)`, `rgb(255, 242, 0)`, `rgb(255, 145, 0)`, `rgb(224, 127, 0)`, `rgb(255, 17, 0)`, `rgb(203, 14, 0)`]
+  const colorList = [`rgb(0, 225, 0)`, `rgb(0, 163, 17)`, `rgb(1, 87, 9)`, `rgb(255, 247, 98)`, 
+    `rgb(255, 245, 54)`, `rgb(255, 242, 0)`, `rgb(255, 145, 0)`, `rgb(224, 127, 0)`, `rgb(255, 17, 0)`, `rgb(203, 14, 0)`]
 
   return colorList[n]
 }
@@ -168,5 +167,4 @@ function setBoard(currentBoard){
     }
   }
 }
-
 
