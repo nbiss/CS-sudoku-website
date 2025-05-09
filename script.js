@@ -85,7 +85,6 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 //Set board
-// setBoard(BOARD.currboard)
 
 // reset button
   const resetButton = document.getElementById('resetButton');
